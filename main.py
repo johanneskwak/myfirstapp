@@ -2,16 +2,18 @@ import streamlit as st
 
 # 페이지 설정
 st.set_page_config(
-    page_title="MBTI 직업 추천기",
-    page_icon="🎈",
+    page_title="MBTI 직업 추천기 🎈",
+    page_icon="✨",
     layout="centered"
 )
 
 # 타이틀과 설명
-st.title("🌸 MBTI 기반 직업 추천기")
+st.title("🌸 나만의 MBTI 직업 추천기 ✨")
 st.markdown("""
-귀엽고 깔끔하게!  
-당신의 MBTI에 딱 맞을 것 같은 직업 3개를 추천해 드려요. ✨
+안녕하세요!  
+당신의 MBTI에 딱 맞는 직업을 추천하고,  
+꿈을 이루기 위한 **진로 로드맵**까지 알려주는  
+귀엽고 유익한 웹앱이에요! 🐰💡
 """)
 
 # MBTI 목록
@@ -22,7 +24,7 @@ mbti_types = [
     "ISTP", "ISFP", "ESTP", "ESFP"
 ]
 
-# 각 MBTI에 맞는 추천 직업
+# 직업 추천
 job_recommendations = {
     "INTJ": ["데이터 과학자", "전략 컨설턴트", "R&D 엔지니어"],
     "INTP": ["연구원", "시스템 분석가", "이론 물리학자"],
@@ -42,16 +44,52 @@ job_recommendations = {
     "ESFP": ["배우", "가수", "행사 기획자"]
 }
 
-# 사용자 입력
+# 진로 로드맵 (간단 예시)
+roadmaps = {
+    "데이터 과학자": [
+        "📚 중·고등학교: 수학과 통계, 컴퓨터 과목에 집중해 기초 실력 다지기",
+        "💻 대학교: 컴퓨터공학, 통계학, 데이터사이언스 관련 전공",
+        "🧠 추가: 파이썬, R 같은 프로그래밍 언어와 데이터 분석 프로젝트 경험 쌓기"
+    ],
+    "상담가": [
+        "📚 중·고등학교: 심리학, 사회, 국어 등 사람과 마음을 이해할 수 있는 과목에 집중",
+        "🎓 대학교: 심리학, 사회복지학 등 관련 전공",
+        "🧡 추가: 자원봉사, 멘토링 활동 등을 통해 실무 감각 익히기"
+    ],
+    "그래픽 디자이너": [
+        "🎨 중·고등학교: 미술, 디자인 과목과 다양한 드로잉 활동으로 창의력 키우기",
+        "🎓 대학교: 시각디자인, 산업디자인 전공",
+        "🖌 추가: 포트폴리오 제작, 디자인 공모전 참가로 실전 경험"
+    ],
+    # 필요에 따라 다른 직업도 추가 가능!
+}
+
+# MBTI 선택
 selected_mbti = st.selectbox("🌱 당신의 MBTI를 선택하세요:", mbti_types)
 
-# 버튼을 눌러 결과 보기
-if st.button("추천 직업 보기! 💡"):
+# 버튼 클릭 시 결과 출력
+if st.button("✨ 나만의 직업 추천 보기!"):
     recommended_jobs = job_recommendations.get(selected_mbti, [])
-    st.subheader(f"✨ {selected_mbti}에게 추천하는 직업:")
+    st.balloons()  # 풍선 효과
+
+    st.subheader(f"🎉 {selected_mbti}에게 추천하는 직업 3가지:")
     for job in recommended_jobs:
-        st.write(f"- {job}")
+        st.write(f"✅ {job}")
+
+    st.markdown("---")
+    st.subheader("🚀 진로 로드맵 예시")
+
+    # 첫 번째 추천 직업의 로드맵만 예시로 보여주기
+    first_job = recommended_jobs[0]
+    roadmap = roadmaps.get(first_job)
+
+    if roadmap:
+        st.markdown(f"**🌟 {first_job}** 을(를) 꿈꾼다면:")
+        for step in roadmap:
+            st.write(step)
+    else:
+        st.write("아직 준비 중이에요! 곧 더 많은 정보를 추가할게요. 😊")
 
 # 푸터
 st.markdown("---")
-st.caption("Made with ❤️ using Streamlit")
+st.caption("Made with ❤️ using Streamlit · 귀엽고 유익한 진로 탐색 도우미 🌷")
